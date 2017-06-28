@@ -1,5 +1,4 @@
 //Name : Patel Raj Mahendrakumar
-//ID   : N03555681
 //Subject: Programming and Data Structure
 //Assignment 1
 //precondition : Enter integer value between 0 to 100 and insert negative integer value as end of input.
