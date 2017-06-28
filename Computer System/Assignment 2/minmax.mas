@@ -1,0 +1,55 @@
+
+prompt  : dw    "Enter number: "
+lprompt : dw    "Largest number = "
+sprompt : dw    "\nSmallest number = "
+largest : dw    0
+smallest: dw    0
+nextnum : dw    0
+counter : dw    9
+@1      : dw    1
+
+
+begin   : ldc   prompt          ;load prompt to enter number
+          sout                  
+          din                   ;first number input
+          st    largest         ;store in largest
+          st    smallest        ;store in smallest
+
+loop    : ldc   prompt          ;load prompt to enter number
+          sout
+          din                   ;next number input
+          st    nextnum         ;store next number
+          ld    largest         ;load largest number
+          sub   nextnum         ;substract next number from largest number
+          jn    label1          ;if answer is negative then jump to label1
+          ja    exit1           ;jump to exit1
+
+label1  : ld    nextnum         ;load next number
+          st    largest         ;store next number in largest
+
+exit1   : ld    nextnum         ;load next number
+          sub   smallest        ;substract smallest number from next number
+          jn    label2          ;if answer is negative then jump to label2
+          ja    exit2           ;jump to exit2
+
+label2  : ld    nextnum         ;load next number
+          st    smallest        ;store next number in smallest
+
+exit2   : ld    counter         ;load counter
+          sub   @1              ;substract 1 from counter
+          st    counter         ;store answer in counter
+          jnz   loop            ;loop ends when counter becomes 0
+
+          ldc   lprompt         ;load largest number propmt
+          sout
+          ld    largest         ;load largest number
+          dout                  ;display largest number
+          ldc   sprompt         ;load smallest number prompt
+          sout
+          ld    smallest        ;load smallest number
+          dout                  ;display smallest number
+          ldc   '\n'
+          aout  
+          halt                  
+          
+

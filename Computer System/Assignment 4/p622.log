@@ -1,0 +1,88 @@
+sim Version 7.0 Log File p622.log
+
+Your name          = Patel Raj
+Machinecode file   = p622.mac     Size =  14 (hex) =   20 (dec)
+Microcode file     = p622.hor     Size =  13 (hex) =   19 (dec)
+Config file        = p622.cfg
+Answer file        = p622.ans
+Check data         = 555f 20 22 25 189 45420
+======================== Log turned on  Thu Mar 30 20:58:34 2017
+======================== Starting session ======================
+---- [T7] g
+143
+Machine inst count =    19 (hex) =     25 (dec)
+Micro   inst count =    A6 (hex) =    166 (dec)
+---- [T7] SD
+        !p622
+        ld    zero
+        ldct  ten
+loop:   addi  array
+        decj  loop
+        st    sum
+        dout
+        halt
+sum:    dw    0
+zero:   dw    0
+ten:    dw    10
+array:  dw    1
+        dw    1
+        dw    2
+        dw    3
+        dw    5
+        dw    8
+        dw    13
+        dw    21
+        dw    34
+        dw    55
+---- [T7] enable
+Microlevel enabled
+---- [T7] sd
+/  Basic Instruction Set Horizontal Microcode    p622.has
+
+/ The label indicates the opcode decoded up to that point.
+/ For example, control reaches the label L011 when opcode
+/ bits 011 have been decoded.
+
+/****************************************************************/
+/     Fetch instruction and increment pc register                /
+/****************************************************************/
+fetch: mar = pc; pc = pc + 1;             / increment pc
+       rd;                                / fetch mach inst
+       ir = mdr; if(s) goto L1; mar = mdr;/ test 1st bit
+
+/****************************************************************/
+/      Decode opcode                                             /
+/****************************************************************/
+       mdr = left(mdr); if (s) goto L01;    / test 2nd bot
+       mdr = left(mdr); if (s) goto L001;   / test 3rd bot
+       mdr = left(mdr); if (s) goto L0001;  / test 3rd bot
+/****************************************************************/
+/      Microcode for each instruction                            /
+/****************************************************************/
+L0000: /-------------------------- LDCT --------------------------
+       rd;                                / read operand
+       ct = mdr; goto fetch;              / load ct with operand
+L0001: /-------------------------- LD ----------------------------
+       rd;                                / read operand
+       ac = mdr; goto fetch;              / load ac with operand
+L001:  /-------------------------- ST ----------------------------
+       mdr =ac;
+       wr; goto fetch;                    / write
+L01:   /-------------------------- DECJ --------------------------
+       ct = ct - 1; if(z) goto fetch;     / decrement ct and check zero
+       pc = ir & xmask; goto fetch;       / load pc with jump address
+L1:   /-------------------------- ADDI --------------------------
+       f = ct -1;
+       f = ir + f;
+       mar = f;
+       rd;
+       ac = ac + mdr; goto fetch;
+---- [T7] q
+
+Report for:         Patel Raj
+Program output:     correct
+Machine code size:  20     (0     under limit)
+Microcode size:     19     (3     under limit)
+Machine inst count: 25     (0     under limit)
+Micro inst count:   166    (23    under limit)
+================== sim(c826) terminated Thu Mar 30 20:58:34 2017

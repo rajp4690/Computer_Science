@@ -1,0 +1,51 @@
+!o
+main  : esba
+        aloc    1
+        ldc     prompt
+        sout
+        ld      a
+        dout
+        ldc     '\n'
+        aout
+        ja      @L0
+
+@thunk: ldc     a
+        str     -1
+        ldc     -1
+        cora
+        ret
+
+@L0   : ldc     @thunk
+        push
+        call    @f$i
+        ldc     prompt
+        sout
+        ld      a
+        dout
+        ldc     '\n'
+        aout
+        ldc     0
+        reba
+        ret
+
+@f$i  : esba
+        ldr     2
+        pbp
+        bpbp
+        cali
+        pobp
+        ldi
+        push
+        aloc    1
+        ldi
+        addc    5
+        str     -2
+        ldr     -1
+        sti
+        reba
+        ret
+
+prompt: dw      "a = "
+a     : dw      100
+        public  main
+        public  @f$i

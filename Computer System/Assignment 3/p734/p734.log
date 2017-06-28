@@ -1,0 +1,53 @@
+sim Version 7.0 Log File p734.log
+
+Your name          = Patel Raj
+Machinecode file   = p734.mac     Size =  1F (hex) =   31 (dec)
+Microcode file     = none         Size =  93 (hex) =  147 (dec)
+Answer file        = p734.ans
+Check data         = b252
+======================== Log turned on  Wed Mar 08 20:48:27 2017
+======================== Starting session ======================
+---- [T7] g
+7 7
+7 7
+1 2
+Machine inst count =    27 (hex) =     39 (dec)
+Micro   inst count =   153 (hex) =    339 (dec)
+---- [T7] SD
+main  : ld    x
+        push
+        call  f
+        dloc  1
+        ld    y
+        push
+        call  f
+        dloc  1
+        ld    x
+        dout
+        ldc   space
+        sout
+        ld    y
+        dout
+        halt
+
+f     : ldc   7
+        push
+        str   2
+        dout
+        ldc   space
+        sout
+        ldr   0
+        dout
+        ldc   '\n'
+        aout
+        dloc  1
+        ret
+
+space : dw    " "
+x     : dw    1
+y     : dw    2
+---- [T7] q
+
+Report for:         Patel Raj
+Program output:     correct
+================== sim(036e) terminated Wed Mar 08 20:48:27 2017

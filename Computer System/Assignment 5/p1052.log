@@ -1,0 +1,40 @@
+sim Version 7.0 Log File p1052.log
+
+Your name          = Patel Raj
+Machinecode file   = p1052.mac    Size = F4E (hex) = 3918 (dec)
+Microcode file     = none         Size =  93 (hex) =  147 (dec)
+Answer file        = p1052.ans
+Check data         = a250
+======================== Log turned on  Mon May 01 15:14:43 2017
+======================== Starting session ======================
+---- [T7] g
+a4
+a3
+a2
+a1
+Machine inst count =   149 (hex) =    329 (dec)
+Micro   inst count =   DA4 (hex) =   3492 (dec)
+---- [T7] SD
+main :    ldr    1
+          sub    @1
+          str    1
+          jnz    @L0
+          ldc    0
+          ret
+
+@L0  :    ldr    2
+          addr   1
+          ldi
+          sout
+          ldc    '\n'
+          aout
+          ja     main
+
+@1   :    dw     1
+          public main
+
+---- [T7] q
+
+Report for:         Patel Raj
+Program output:     correct
+================== sim(9a33) terminated Mon May 01 15:14:43 2017

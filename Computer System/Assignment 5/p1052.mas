@@ -1,0 +1,18 @@
+main :    ldr    1
+          sub    @1
+          str    1
+          jnz    @L0
+          ldc    0
+          ret
+
+@L0  :    ldr    2
+          addr   1
+          ldi
+          sout
+          ldc    '\n'
+          aout
+          ja     main
+
+@1   :    dw     1
+          public main
+

@@ -1,0 +1,40 @@
+/  Basic Instruction Set Horizontal Microcode    p622.has
+
+/ The label indicates the opcode decoded up to that point.
+/ For example, control reaches the label L011 when opcode
+/ bits 011 have been decoded.
+
+/****************************************************************/
+/     Fetch instruction and increment pc register                /
+/****************************************************************/
+fetch: mar = pc; pc = pc + 1;             / increment pc
+       rd;                                / fetch mach inst
+       ir = mdr; if(s) goto L1; mar = mdr;/ test 1st bit
+
+/****************************************************************/
+/      Decode opcode                                             /
+/****************************************************************/
+       mdr = left(mdr); if (s) goto L01;    / test 2nd bot
+       mdr = left(mdr); if (s) goto L001;   / test 3rd bot
+       mdr = left(mdr); if (s) goto L0001;  / test 3rd bot
+/****************************************************************/
+/      Microcode for each instruction                            /
+/****************************************************************/
+L0000: /-------------------------- LDCT --------------------------
+       rd;                                / read operand
+       ct = mdr; goto fetch;              / load ct with operand
+L0001: /-------------------------- LD ----------------------------
+       rd;                                / read operand
+       ac = mdr; goto fetch;              / load ac with operand
+L001:  /-------------------------- ST ----------------------------
+       mdr =ac;
+       wr; goto fetch;                    / write
+L01:   /-------------------------- DECJ --------------------------
+       ct = ct - 1; if(z) goto fetch;     / decrement ct and check zero
+       pc = ir & xmask; goto fetch;       / load pc with jump address
+L1:   /-------------------------- ADDI --------------------------
+       f = ct -1;
+       f = ir + f;
+       mar = f;
+       rd;
+       ac = ac + mdr; goto fetch;

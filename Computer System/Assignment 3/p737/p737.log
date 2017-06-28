@@ -1,0 +1,66 @@
+sim Version 7.0 Log File p737.log
+
+Your name          = Patel Raj
+Machinecode file   = p737.mac     Size =  2A (hex) =   42 (dec)
+Microcode file     = none         Size =  93 (hex) =  147 (dec)
+Answer file        = p737.ans
+Check data         = ec7e
+======================== Log turned on  Thu Mar 09 19:15:00 2017
+======================== Starting session ======================
+---- [T7] g
+1 1
+6 2
+Machine inst count =    35 (hex) =     53 (dec)
+Micro   inst count =   1F6 (hex) =    502 (dec)
+---- [T7] SD
+main  : ldc   1
+        st    x
+        ldc   2
+        st    y
+        ld    z
+        push
+        ld    y
+        push
+        ld    x
+        push
+        call  f
+        dloc  3
+        ld    z
+        push
+        ld    y
+        push
+        ld    z
+        push
+        call  f
+        dloc  3
+        halt
+
+f     : ldc   1
+        add   @s0_j
+        st    @s0_j
+        st    @s0_i
+        st    @s0_h
+        str   3
+        str   2
+        ldr   1
+        dout
+        ldc   space
+        sout
+        ldr   2
+        dout
+        ldc   '\n'
+        aout
+        ret
+
+space : dw    " "
+x     : dw    0
+y     : dw    0
+z     : dw    6
+@s0_h :
+@s0_i :
+@s0_j :
+---- [T7] q
+
+Report for:         Patel Raj
+Program output:     correct
+================== sim(f02f) terminated Thu Mar 09 19:15:00 2017

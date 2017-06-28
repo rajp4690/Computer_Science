@@ -1,0 +1,71 @@
+sim Version 7.0 Log File p1341.log
+
+Your name          = Patel Raj
+Machinecode file   = p1341.mac    Size =  DE (hex) =  222 (dec)
+Microcode file     = o.hor        Size = 12E (hex) =  302 (dec)
+Config file        = o.cfg
+Answer file        = p1341.ans
+Check data         = 919e
+======================== Log turned on  Mon May 01 17:18:15 2017
+======================== Starting session ======================
+---- [T7] g
+a = 100
+a = 105
+Machine inst count =    81 (hex) =    129 (dec)
+Micro   inst count =   552 (hex) =   1362 (dec)
+---- [T7] SD
+!o
+main  : esba
+        aloc    1
+        ldc     prompt
+        sout
+        ld      a
+        dout
+        ldc     '\n'
+        aout
+        ja      @L0
+
+@thunk: ldc     a
+        str     -1
+        ldc     -1
+        cora
+        ret
+
+@L0   : ldc     @thunk
+        push
+        call    @f$i
+        ldc     prompt
+        sout
+        ld      a
+        dout
+        ldc     '\n'
+        aout
+        ldc     0
+        reba
+        ret
+
+@f$i  : esba
+        ldr     2
+        pbp
+        bpbp
+        cali
+        pobp
+        ldi
+        push
+        aloc    1
+        ldi
+        addc    5
+        str     -2
+        ldr     -1
+        sti
+        reba
+        ret
+
+prompt: dw      "a = "
+a     : dw      100
+        public  main
+        public  @f$i---- [T7] q
+
+Report for:         Patel Raj
+Program output:     correct
+================== sim(9ed6) terminated Mon May 01 17:18:15 2017

@@ -1,0 +1,30 @@
+sim Version 7.0 Log File none.log
+
+Your name          = Patel Raj
+Machinecode file   = none         Size =   0 (hex) =    0 (dec)
+Microcode file     = none         Size =  93 (hex) =  147 (dec)
+======================== Log turned on  Sun Jan 29 09:24:42 2017
+======================== Starting session ======================
+---- [T7] 0: ld   /0 000/ e
+  0: 0000/0003
+  1: 0000/2004
+  2: 0000/
+---- [T7] 0: ld   /0 003/ d
+  0: 0003 2004 0000 0000 0000 0000 0000 0000    ........
+  8: 0000 0000 0000 0000 0000 0000 0000 0000    ........
+ 10: 0000 0000 0000 0000 0000 0000 0000 0000    ........
+ 18: 0000 0000 0000 0000 0000 0000 0000 0000    ........
+---- [T7] 0: ld   /0 003/ e
+  2: 0000/ffff
+  3: 0000/000a
+  4: 0000/fffb
+  5: 0000/
+---- [T7] 0: ld   /0 003/ 
+  0: ld   /0 003/ ac=0000/000A  
+  1: add  /2 004/ ac=000A/0005  
+  2: halt /FFFF / 
+Machine inst count =     3 (hex) =      3 (dec)
+Micro   inst count =    18 (hex) =     24 (dec)
+---- [T7] l-
+======================== Log turned Off Sun Jan 29 09:26:13 2017
+================== sim(8552) terminated Sun Jan 29 09:26:18 2017

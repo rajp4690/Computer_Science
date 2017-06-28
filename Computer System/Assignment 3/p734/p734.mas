@@ -1,0 +1,32 @@
+main  : ld    x
+        push
+        call  f
+        dloc  1
+        ld    y
+        push
+        call  f
+        dloc  1
+        ld    x
+        dout
+        ldc   space
+        sout
+        ld    y
+        dout
+        halt
+
+f     : ldc   7
+        push
+        str   2
+        dout
+        ldc   space
+        sout
+        ldr   0
+        dout
+        ldc   '\n'
+        aout
+        dloc  1
+        ret
+
+space : dw    " "
+x     : dw    1
+y     : dw    2
