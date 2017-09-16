@@ -77,7 +77,7 @@ public class Statistician{
 
 		if(statMax < addend.statMax)
 			statMax = addend.statMax;
-		if(statMin < addend.statMin)
+		if(statMin > addend.statMin)
 			statMin = addend.statMin;
 	}
 
