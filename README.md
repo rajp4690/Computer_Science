@@ -1,7 +1,6 @@
 # Computer_Science
 All Assignments of 
 
-(1) Computer System
+1. Computer System
 
-
-(2) Programming and Data Structures
+2. Programming and Data Structures
